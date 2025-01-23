@@ -12,18 +12,21 @@ export async function sendEmail(
       recipientName,
     });
 
-    const response = await fetch("http://localhost:5000/api/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        to,
-        subject,
-        pdfUrl,
-        recipientName,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/send-email`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to,
+          subject,
+          pdfUrl,
+          recipientName,
+        }),
+      }
+    );
 
     const data = await response.json();
     console.log("Server response:", data);
